@@ -1,4 +1,4 @@
-# PETER DEKKO TECH TRICKS
+﻿# PETER DEKKO TECH TRICKS
 
 Official brand website for Peter Dekko Tech Tricks — web development, software products, and business systems.
 
