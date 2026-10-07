@@ -1,26 +1,33 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-bg: #05070d;
+  --color-bg-soft: #0a0f1a;
+  --color-surface: #0f1522;
+  --color-border: #1a2233;
+  --color-foreground: #e6edf7;
+  --color-muted: #8a97ad;
+  --color-accent: #22d3ee;
+  --color-accent-2: #3b82f6;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --radius-xl: 14px;
+  --radius-2xl: 20px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+* { border-color: var(--color-border); }
+html, body { background: var(--color-bg); color: var(--color-foreground); }
+body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.gradient-text {
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.glow { box-shadow: 0 0 40px -10px rgba(34,211,238,0.35); }
+.surface {
+  background: linear-gradient(180deg, rgba(15,21,34,0.9), rgba(10,15,26,0.9));
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
 }
