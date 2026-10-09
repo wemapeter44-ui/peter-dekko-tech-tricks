@@ -5,9 +5,9 @@
   description:
     "Web development, software products, and business systems by Peter Dekko Tech Tricks.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  email: "[YOUR EMAIL]",
-  phone: "[YOUR PHONE]",
-  location: "[YOUR LOCATION]",
+  email: "wemapeter44@gmail.com",
+  phone: "0141602158",
+  location: "Mombasa, Kenya",
   nav: [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
@@ -18,10 +18,10 @@
     { label: "Contact", href: "/contact" },
   ],
   socials: {
-    github: "[YOUR GITHUB URL]",
-    linkedin: "[YOUR LINKEDIN URL]",
-    x: "[YOUR X URL]",
-    youtube: "[YOUR YOUTUBE URL]",
+    github: "https://github.com/wemapeter44-ui",
+    linkedin: "",
+    x: "",
+    youtube: "https://www.youtube.com/channel/UCKObhSKaZNEddfG2wy_tbMA",
   },
 } as const;
 

@@ -1,17 +1,23 @@
-﻿import { Container } from "@/components/layout/Container";
+﻿import { Hero } from "@/components/sections/Hero";
+import { WhatIBuild } from "@/components/sections/WhatIBuild";
+import { ServicesPreview } from "@/components/sections/ServicesPreview";
+import { FeaturedProducts } from "@/components/sections/FeaturedProducts";
+import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
+import { TechStack } from "@/components/sections/TechStack";
+import { WhyWorkWithMe } from "@/components/sections/WhyWorkWithMe";
+import { FinalCTA } from "@/components/sections/FinalCTA";
 
 export default function Home() {
   return (
-    <Container className="py-24">
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-400">
-        Peter Dekko Tech Tricks
-      </p>
-      <h1 className="mt-3 text-4xl font-semibold tracking-tight sm:text-6xl">
-        Building <span className="gradient-text">software</span> that solves real problems.
-      </h1>
-      <p className="mt-6 max-w-2xl text-[color:var(--color-muted)]">
-        Home page coming in Stage 3.
-      </p>
-    </Container>
+    <>
+      <Hero />
+      <WhatIBuild />
+      <ServicesPreview />
+      <FeaturedProducts />
+      <FeaturedProjects />
+      <TechStack />
+      <WhyWorkWithMe />
+      <FinalCTA />
+    </>
   );
 }

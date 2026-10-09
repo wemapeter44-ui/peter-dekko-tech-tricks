@@ -12,14 +12,31 @@ export const metadata: Metadata = {
   title: { default: site.name, template: `%s | ${site.shortName}` },
   description: site.description,
   metadataBase: new URL(site.url),
+  keywords: [
+    "Peter Dekko",
+    "Peter Dekko Tech Tricks",
+    "web development Kenya",
+    "software developer Kenya",
+    "business systems",
+    "SmartMwalimu",
+    "Next.js developer",
+  ],
+  authors: [{ name: site.author }],
+  creator: site.author,
   openGraph: {
     title: site.name,
     description: site.description,
     url: site.url,
     siteName: site.name,
     type: "website",
+    locale: "en_KE",
   },
-  twitter: { card: "summary_large_image", title: site.name, description: site.description },
+  twitter: {
+    card: "summary_large_image",
+    title: site.name,
+    description: site.description,
+  },
+  icons: { icon: "/favicon.ico" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

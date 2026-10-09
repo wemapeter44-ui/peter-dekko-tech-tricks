@@ -11,7 +11,7 @@ export function Section({
   id?: string;
 }) {
   return (
-    <section id={id} className={cn("py-16 sm:py-20 lg:py-24", className)}>
+    <section id={id} className={cn("py-12 sm:py-16", className)}>
       {children}
     </section>
   );
@@ -27,7 +27,7 @@ export function SectionHeading({
   description?: string;
 }) {
   return (
-    <div className="mb-10 max-w-2xl">
+    <div className="mb-8 max-w-2xl">
       {eyebrow ? (
         <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-cyan-400">
           {eyebrow}
@@ -44,3 +44,5 @@ export function SectionHeading({
     </div>
   );
 }
+
+export { Container } from "./Container";

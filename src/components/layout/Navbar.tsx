@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { site } from "@/config/site";
@@ -13,10 +14,15 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-[color:var(--color-border)] bg-[color:var(--color-bg)]/80 backdrop-blur">
       <Container className="flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br from-cyan-400 to-blue-600 text-sm font-bold text-black">
-            PD
-          </span>
+        <Link href="/" className="flex items-center gap-2.5">
+          <Image
+            src="/logo.jpeg"
+            alt="Peter Dekko Tech Tricks"
+            width={34}
+            height={34}
+            className="rounded-lg object-cover"
+            priority
+          />
           <span className="text-sm font-semibold tracking-wide sm:text-base">
             Peter Dekko <span className="text-cyan-400">Tech Tricks</span>
           </span>
@@ -50,12 +56,7 @@ export function Navbar() {
         </button>
       </Container>
 
-      <div
-        className={cn(
-          "overflow-hidden border-t border-[color:var(--color-border)] lg:hidden",
-          open ? "block" : "hidden"
-        )}
-      >
+      <div className={cn("overflow-hidden border-t border-[color:var(--color-border)] lg:hidden", open ? "block" : "hidden")}>
         <Container className="flex flex-col py-3">
           {site.nav.map((item) => (
             <Link

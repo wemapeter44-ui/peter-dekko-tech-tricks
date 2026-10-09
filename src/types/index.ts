@@ -14,6 +14,7 @@ export type Product = {
   ctaLabel: string;
   ctaUrl: string;
   featured?: boolean;
+  logo?: string;
 };
 
 export type Project = {
@@ -28,6 +29,7 @@ export type Project = {
   liveUrl?: string;
   repoUrl?: string;
   featured?: boolean;
+  cover?: string;
 };
 
 export type Service = {
@@ -36,4 +38,16 @@ export type Service = {
   description: string;
   deliverables: string[];
   icon: string;
+};
+
+export type Post = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  readingTime: string;
+  tags: string[];
+  content: string;
+  featured?: boolean;
+  cover?: string;
 };
