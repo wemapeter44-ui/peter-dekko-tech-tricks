@@ -7,25 +7,57 @@ type Status = "idle" | "submitting" | "sent" | "error";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
-  const [error, setError] = useState<string | null>(null);
+  const [msg, setMsg] = useState<string>("");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("submitting");
-    setError(null);
+    setMsg("");
 
-    const form = new FormData(e.currentTarget);
-    const data = Object.fromEntries(form.entries());
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+
+    const payload = {
+      name: String(fd.get("name") ?? ""),
+      email: String(fd.get("email") ?? ""),
+      phone: String(fd.get("phone") ?? ""),
+      service: String(fd.get("service") ?? ""),
+      budget: String(fd.get("budget") ?? ""),
+      timeline: String(fd.get("timeline") ?? ""),
+      message: String(fd.get("message") ?? ""),
+    };
 
     try {
-      // Backend not wired yet — Stage 15 will replace this with a real API call.
-      console.log("Form data (not sent yet):", data);
-      await new Promise((r) => setTimeout(r, 600));
-      setStatus("sent");
-      e.currentTarget.reset();
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const text = await res.text();
+      let json: { ok?: boolean; error?: string } = {};
+      try {
+        json = JSON.parse(text);
+      } catch {
+        // response wasn't JSON — treat as server error
+      }
+
+      if (res.ok && json.ok) {
+        setStatus("sent");
+        setMsg("Thanks — your message was received. I'll get back to you soon.");
+        form.reset();
+        return;
+      }
+
+      setStatus("error");
+      setMsg(json.error ?? `Server responded with ${res.status}.`);
     } catch (err) {
       setStatus("error");
-      setError("Something went wrong. Please try again.");
+      setMsg(
+        err instanceof Error
+          ? `Network error: ${err.message}`
+          : "Network error. Please try again."
+      );
     }
   }
 
@@ -44,8 +76,8 @@ export function ContactForm() {
           </label>
           <select
             name="service"
-            className="w-full rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-bg-soft)] px-3 py-2.5 text-sm outline-none focus:border-cyan-400"
             defaultValue=""
+            className="w-full rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-bg-soft)] px-3 py-2.5 text-sm outline-none focus:border-cyan-400"
           >
             <option value="" disabled>Select a service</option>
             <option>Business website</option>
@@ -66,8 +98,8 @@ export function ContactForm() {
           </label>
           <select
             name="budget"
-            className="w-full rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-bg-soft)] px-3 py-2.5 text-sm outline-none focus:border-cyan-400"
             defaultValue=""
+            className="w-full rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-bg-soft)] px-3 py-2.5 text-sm outline-none focus:border-cyan-400"
           >
             <option value="" disabled>Select a range</option>
             <option>Under KES 30,000</option>
@@ -95,13 +127,13 @@ export function ContactForm() {
 
       {status === "sent" ? (
         <p className="rounded-lg border border-cyan-400/30 bg-cyan-400/10 px-4 py-3 text-sm text-cyan-300">
-          Thanks — I'll get back to you soon. (Note: backend not wired yet.)
+          {msg}
         </p>
       ) : null}
 
-      {error ? (
+      {status === "error" ? (
         <p className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
-          {error}
+          {msg}
         </p>
       ) : null}
 
