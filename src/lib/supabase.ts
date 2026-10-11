@@ -28,6 +28,8 @@ if (!url || !url.startsWith("http")) {
 if (!serviceKey) throw new Error("Missing SUPABASE_SERVICE_ROLE_KEY");
 
 export const supabaseBrowser = createClient(url, anonKey);
-export const supabaseAdmin = createClient(url, serviceKey, {
-  auth: { persistSession: false, autoRefreshToken: false },
-});
+export function supabaseAdmin() {
+  return createClient(url, serviceKey, {
+    auth: { persistSession: false, autoRefreshToken: false },
+  });
+}
