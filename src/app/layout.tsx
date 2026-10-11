@@ -1,28 +1,17 @@
 ﻿import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { site } from "@/config/site";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
+const mono = JetBrains_Mono({ variable: "--font-mono", subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
   title: { default: site.name, template: `%s | ${site.shortName}` },
   description: site.description,
   metadataBase: new URL(site.url),
-  keywords: [
-    "Peter Dekko",
-    "Peter Dekko Tech Tricks",
-    "web development Kenya",
-    "software developer Kenya",
-    "business systems",
-    "SmartMwalimu",
-    "Next.js developer",
-  ],
-  authors: [{ name: site.author }],
-  creator: site.author,
   openGraph: {
     title: site.name,
     description: site.description,
@@ -30,19 +19,26 @@ export const metadata: Metadata = {
     siteName: site.name,
     type: "website",
     locale: "en_KE",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: site.name }],
   },
   twitter: {
     card: "summary_large_image",
     title: site.name,
     description: site.description,
+    images: ["/og.png"],
   },
-  icons: { icon: "/favicon.ico" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <html lang="en" className={`${inter.variable} ${mono.variable}`}>
+      <head>
+        <link rel="icon" href="/favicon.ico?v=1" sizes="any" />
+        <link rel="icon" type="image/png" href="/icon-512.png?v=1" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1" />
+        <link rel="shortcut icon" href="/favicon.ico?v=1" />
+      </head>
+      <body className="antialiased">
         <Navbar />
         <main className="min-h-[70vh]">{children}</main>
         <Footer />
