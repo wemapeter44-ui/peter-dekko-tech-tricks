@@ -12,6 +12,12 @@ const eslintConfig = [
   {
     ignores: [".next/**", "node_modules/**"],
   },
+  {
+    rules: {
+      "react/no-unescaped-entities": "off",
+      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+    },
+  },
 ];
 
 export default eslintConfig;

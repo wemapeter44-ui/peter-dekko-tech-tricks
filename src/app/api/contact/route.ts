@@ -47,8 +47,9 @@ export async function POST(req: Request) {
     }
 
     const data = parsed.data;
+    const db = supabaseAdmin();
 
-    const { error: insertError } = await supabaseAdmin
+    const { error: insertError } = await db
       .from("contact_submissions")
       .insert({
         name: data.name,
