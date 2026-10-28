@@ -13,8 +13,6 @@
     { label: "About", href: "/about" },
     { label: "Products", href: "/products" },
     { label: "Services", href: "/services" },
-    { label: "Projects", href: "/projects" },
-    { label: "Tech Hub", href: "/tech-hub" },
     { label: "Contact", href: "/contact" },
   ],
   socials: {
@@ -26,3 +24,4 @@
 } as const;
 
 export type Site = typeof site;
+

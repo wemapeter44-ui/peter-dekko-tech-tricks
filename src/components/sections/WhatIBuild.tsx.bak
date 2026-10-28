@@ -1,0 +1,80 @@
+﻿
+import { Container, Section, SectionHeading } from "@/components/layout/Section";
+import {
+  Code2,
+  Database,
+  Workflow,
+  LifeBuoy,
+  ArrowUpRight,
+} from "lucide-react";
+
+const items = [
+  {
+    icon: Code2,
+    number: "01",
+    title: "Websites & Web Apps",
+    desc: "Modern, responsive digital experiences that help businesses build credibility and serve customers online.",
+  },
+  {
+    icon: Database,
+    number: "02",
+    title: "Business Systems",
+    desc: "Custom management tools for schools and businesses, from student records to inventory and reporting.",
+  },
+  {
+    icon: Workflow,
+    number: "03",
+    title: "Automation & AI",
+    desc: "Practical automation and AI-powered features that reduce repetitive work and improve workflows.",
+  },
+  {
+    icon: LifeBuoy,
+    number: "04",
+    title: "IT Support & Maintenance",
+    desc: "Technical assistance, troubleshooting, updates, and improvements to keep your digital tools working.",
+  },
+];
+
+export function WhatIBuild() {
+  return (
+    <Section>
+      <Container>
+        <SectionHeading
+          eyebrow="What We Build"
+          title="Technology built around your needs."
+          description="From your first business website to custom software systems, we turn practical ideas into useful digital solutions."
+        />
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {items.map(({ icon: Icon, number, title, desc }) => (
+            <article
+              key={title}
+              className="surface group relative overflow-hidden rounded-2xl border border-white/5 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/30"
+            >
+              <div className="mb-7 flex items-center justify-between">
+                <div className="grid h-11 w-11 place-items-center rounded-xl bg-cyan-400/10 text-cyan-400 transition-colors group-hover:bg-cyan-400/20">
+                  <Icon size={21} strokeWidth={1.8} />
+                </div>
+                <span className="text-xs font-medium tracking-widest text-white/30">
+                  {number}
+                </span>
+              </div>
+
+              <h3 className="text-lg font-semibold tracking-tight">
+                {title}
+              </h3>
+
+              <p className="mt-3 text-sm leading-6 text-[color:var(--color-muted)]">
+                {desc}
+              </p>
+
+              <div className="mt-6 flex justify-end text-cyan-400/60 transition-all group-hover:translate-x-1 group-hover:text-cyan-400">
+                <ArrowUpRight size={18} />
+              </div>
+            </article>
+          ))}
+        </div>
+      </Container>
+    </Section>
+  );
+}

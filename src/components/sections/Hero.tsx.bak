@@ -1,0 +1,72 @@
+﻿
+import Link from "next/link";
+import Image from "next/image";
+import { Container } from "@/components/layout/Container";
+import { ArrowRight } from "lucide-react";
+
+export function Hero() {
+  return (
+    <section className="relative isolate overflow-hidden">
+      {/* Background image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/website-background.jpeg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+      </div>
+
+      {/* Dark overlay */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 z-10"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(5,7,13,0.48) 0%, rgba(5,7,13,0.78) 60%, var(--color-bg) 100%)",
+        }}
+      />
+
+      {/* Hero content */}
+      <Container className="relative z-20 py-20 sm:py-28 lg:py-32">
+        <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-400/25 bg-black/40 px-4 py-2 text-xs font-medium tracking-wide text-cyan-200 backdrop-blur">
+          <span className="h-2 w-2 rounded-full bg-cyan-400" />
+          PETER DEKKO TECH TRICKS
+        </p>
+
+        <h1 className="max-w-4xl text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl lg:text-7xl">
+          Technology that turns your ideas into{" "}
+          <span className="gradient-text">digital solutions.</span>
+        </h1>
+
+        <p className="mt-6 max-w-2xl text-base leading-7 text-white/75 sm:text-lg sm:leading-8">
+          We build websites, custom software, business management systems,
+          and automation tools for businesses, schools, and individuals.
+          Practical technology, built around your needs.
+        </p>
+
+        <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+          <Link
+            href="/contact"
+            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-cyan-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
+          >
+            Discuss Your Project <ArrowRight size={17} />
+          </Link>
+
+          <Link
+            href="/services"
+            className="inline-flex min-h-12 items-center justify-center rounded-xl border border-white/20 bg-black/30 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition-colors hover:border-cyan-400/60 hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
+          >
+            Explore Our Services
+          </Link>
+        </div>
+
+        <p className="mt-5 text-xs text-white/55 sm:text-sm">
+          Websites · Software · Business Systems · Technical Support
+        </p>
+      </Container>
+    </section>
+  );
+}

@@ -1,5 +1,6 @@
 ﻿import type { Metadata } from "next";
 import Link from "next/link";
+import BackButton from "@/components/shared/BackButton";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { Container, Section } from "@/components/layout/Section";
@@ -41,7 +42,7 @@ export default async function ProductPage({
       <Section>
         <Container>
           <Link
-            href="/products"
+            href="/"
             className="inline-flex items-center gap-2 text-sm text-[color:var(--color-muted)] hover:text-cyan-400"
           >
             <ArrowLeft size={14} /> All products
@@ -64,7 +65,7 @@ export default async function ProductPage({
       {product.screenshots && product.screenshots.length > 0 ? (
         <Section className="pt-0">
           <Container>
-            <h2 className="mb-6 text-lg font-semibold">Screenshots</h2>
+            
             <ScreenshotGallery screenshots={product.screenshots} title={product.name} />
           </Container>
         </Section>
@@ -127,3 +128,8 @@ export default async function ProductPage({
     </>
   );
 }
+
+
+
+
+

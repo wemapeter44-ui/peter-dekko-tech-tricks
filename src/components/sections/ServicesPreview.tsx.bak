@@ -1,0 +1,46 @@
+﻿
+import Link from "next/link";
+import { Container, Section, SectionHeading } from "@/components/layout/Section";
+import { ServiceCard } from "@/components/shared/ServiceCard";
+import { services } from "@/data/services";
+import { ArrowRight } from "lucide-react";
+
+export function ServicesPreview() {
+  return (
+    <Section>
+      <Container>
+        <div className="motion-safe:animate-[fade-up_700ms_ease-out_both]">
+          <SectionHeading
+            eyebrow="Our Services"
+            title="The right technology for your next step."
+            description="Practical digital services for businesses, schools, and individuals—from your first website to custom software and ongoing technical support."
+          />
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {services.slice(0, 6).map((service, index) => (
+            <div
+              key={service.slug}
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              <ServiceCard service={service} />
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-8 motion-safe:animate-[fade-up_700ms_ease-out_both]">
+          <Link
+            className="group inline-flex items-center gap-2 text-sm font-medium text-cyan-400 transition-colors hover:text-cyan-300"
+            href="/services"
+          >
+            Explore all services
+            <ArrowRight
+              size={16}
+              className="transition-transform duration-300 group-hover:translate-x-1"
+            />
+          </Link>
+        </div>
+      </Container>
+    </Section>
+  );
+}
