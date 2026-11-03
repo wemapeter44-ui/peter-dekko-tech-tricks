@@ -1,13 +1,27 @@
 ﻿import type { Metadata } from "next";
 import Link from "next/link";
-import BackButton from "@/components/shared/BackButton";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ExternalLink } from "lucide-react";
-import { Container, Section } from "@/components/layout/Section";
+import { ArrowLeft, ArrowRight, Check, ExternalLink } from "lucide-react";
+import { Section } from "@/components/layout/Section";
+import { Container } from "@/components/layout/Container";
 import { ScreenshotGallery } from "@/components/shared/ScreenshotGallery";
 import { products } from "@/data/products";
+import type { ProductStatus } from "@/types";
+import { cn } from "@/lib/utils";
 
 type Params = { slug: string };
+
+const statusStyles: Record<ProductStatus, { label: string; className: string }> = {
+  live: { label: "Live", className: "border-emerald-400/30 text-emerald-300" },
+  beta: { label: "Beta", className: "border-accent/30 text-accent" },
+  "in-development": {
+    label: "In development",
+    className: "border-amber-400/30 text-amber-300",
+  },
+  planned: { label: "Planned", className: "border-white/20 text-foreground/70" },
+};
+
+const card = "rounded-2xl border border-border bg-white/[0.025] p-6 sm:p-8";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -37,26 +51,42 @@ export default async function ProductPage({
   const product = products.find((p) => p.slug === slug);
   if (!product) notFound();
 
+  const status = statusStyles[product.status];
+
   return (
     <>
       <Section>
         <Container>
           <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-sm text-[color:var(--color-muted)] hover:text-cyan-400"
+            href="/products"
+            className="inline-flex items-center gap-2 text-sm text-muted transition hover:text-accent"
           >
             <ArrowLeft size={14} /> All products
           </Link>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+          {product.category && (
+            <p className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+              {product.category}
+            </p>
+          )}
+
+          <div
+            className={cn("flex flex-wrap items-center gap-3", !product.category && "mt-8")}
+          >
+            <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
               {product.name}
             </h1>
-            <span className="rounded-full border border-[color:var(--color-border)] px-2.5 py-0.5 text-[10px] uppercase tracking-wider text-[color:var(--color-muted)]">
-              {product.status}
+            <span
+              className={cn(
+                "rounded-full border px-3 py-1 text-xs font-semibold",
+                status.className
+              )}
+            >
+              {status.label}
             </span>
           </div>
-          <p className="mt-3 max-w-2xl text-base text-[color:var(--color-muted)] sm:text-lg">
+
+          <p className="mt-3 max-w-2xl text-base text-muted sm:text-lg">
             {product.tagline}
           </p>
         </Container>
@@ -65,71 +95,73 @@ export default async function ProductPage({
       {product.screenshots && product.screenshots.length > 0 ? (
         <Section className="pt-0">
           <Container>
-            
-            <ScreenshotGallery screenshots={product.screenshots} title={product.name} />
+            <ScreenshotGallery
+              screenshots={product.screenshots}
+              title={product.name}
+            />
           </Container>
         </Section>
       ) : null}
 
       <Section className="pt-0">
-        <Container className="grid gap-10 lg:grid-cols-3">
-          <div className="space-y-10 lg:col-span-2">
-            <div>
-              <h2 className="text-lg font-semibold">Overview</h2>
-              <p className="mt-3 text-sm leading-relaxed text-[color:var(--color-muted)]">
+        <Container className="grid gap-6 lg:grid-cols-3">
+          <div className="space-y-6 lg:col-span-2">
+            <article className={card}>
+              <h2 className="text-lg font-semibold text-foreground">Overview</h2>
+              <p className="mt-3 text-sm leading-7 text-muted">
                 {product.description}
               </p>
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold">Problem</h2>
-              <p className="mt-3 text-sm leading-relaxed text-[color:var(--color-muted)]">
-                {product.problem}
-              </p>
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold">Key features</h2>
-              <ul className="mt-3 space-y-2 text-sm text-[color:var(--color-muted)]">
+            </article>
+
+            <article className={card}>
+              <h2 className="text-lg font-semibold text-foreground">Problem</h2>
+              <p className="mt-3 text-sm leading-7 text-muted">{product.problem}</p>
+            </article>
+
+            <article className={card}>
+              <h2 className="text-lg font-semibold text-foreground">Key features</h2>
+              <ul className="mt-4 grid gap-3 sm:grid-cols-2">
                 {product.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-cyan-400" />
-                    {f}
+                  <li key={f} className="flex items-start gap-2.5 text-sm leading-6 text-muted">
+                    <Check size={16} className="mt-1 shrink-0 text-accent" />
+                    <span>{f}</span>
                   </li>
                 ))}
               </ul>
-            </div>
+            </article>
           </div>
 
-          <aside className="surface h-fit p-6">
-            <p className="text-xs font-semibold uppercase tracking-wider text-[color:var(--color-muted)]">
+          <aside className="surface h-fit p-6 lg:sticky lg:top-24">
+            <p className="text-xs font-semibold uppercase tracking-wider text-muted">
               Tech
             </p>
             <div className="mt-3 flex flex-wrap gap-1.5">
               {product.tech.map((t) => (
                 <span
                   key={t}
-                  className="rounded-md border border-[color:var(--color-border)] px-2 py-0.5 text-[11px] text-[color:var(--color-muted)]"
+                  className="rounded-md border border-border bg-bg/60 px-2 py-1 text-[11px] text-foreground/75"
                 >
                   {t}
                 </span>
               ))}
             </div>
 
-            <Link
-              href={product.ctaUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-cyan-400 px-4 py-2.5 text-sm font-semibold text-black transition hover:bg-cyan-300"
-            >
-              {product.ctaLabel} <ExternalLink size={14} />
-            </Link>
+            <div className="mt-6 flex flex-col gap-3">
+              <a
+                href={product.ctaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary w-full"
+              >
+                {product.ctaLabel} <ExternalLink size={14} />
+              </a>
+              <Link href="/contact" className="btn-secondary w-full">
+                Ask about this product <ArrowRight size={15} />
+              </Link>
+            </div>
           </aside>
         </Container>
       </Section>
     </>
   );
 }
-
-
-
-
-

@@ -9,6 +9,7 @@ export type Product = {
   features: string[];
   tech: string[];
   status: ProductStatus;
+  category?: string;
   screenshots?: string[];
   demoUrl?: string;
   ctaLabel: string;
@@ -50,4 +51,4 @@ export type Post = {
   content: string;
   featured?: boolean;
   cover?: string;
-};
+}; 

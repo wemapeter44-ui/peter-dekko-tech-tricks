@@ -1,5 +1,6 @@
 ﻿import Link from "next/link";
-import { Container, Section, SectionHeading } from "@/components/layout/Section";
+import { Section, SectionHeading } from "@/components/layout/Section";
+import { Container } from "@/components/layout/Container";
 import { ServiceCard } from "@/components/shared/ServiceCard";
 import { services } from "@/data/services";
 import { ArrowRight } from "lucide-react";
@@ -8,7 +9,7 @@ export function ServicesPreview() {
   return (
     <Section>
       <Container>
-        <div className="mb-10 motion-safe:animate-[fade-up_700ms_ease-out_both]">
+        <div className="motion-safe:animate-[fade-up_700ms_ease-out_both]">
           <SectionHeading
             eyebrow="What We Do"
             title="Technology that moves your business forward."
@@ -28,15 +29,13 @@ export function ServicesPreview() {
           ))}
         </div>
 
-        <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="max-w-xl text-sm leading-6 text-[color:var(--color-muted)]">
-            Not sure which service fits your needs? Let’s find the right solution for you.
+        <div className="mt-10 flex flex-col gap-4 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="max-w-xl text-sm leading-6 text-muted">
+            Not sure which service fits your needs? Let’s find the right
+            solution for you.
           </p>
 
-          <Link
-            className="group inline-flex w-fit shrink-0 items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/5 px-5 py-3 text-sm font-semibold text-cyan-300 transition duration-300 hover:border-cyan-300/60 hover:bg-cyan-400/10 hover:text-cyan-200"
-            href="/services"
-          >
+          <Link href="/services" className="btn-secondary group w-fit shrink-0">
             Explore all services
             <ArrowRight
               size={16}

@@ -39,6 +39,7 @@ export const products: Product[] = [
       "Vercel",
     ],
     status: "in-development",
+    category: "School Management SaaS",
     logo: "/logo.jpeg",
     screenshots: ["/products/pdt-shule/showcase.png"],
     ctaLabel: "Explore PDT Shule",
@@ -46,4 +47,3 @@ export const products: Product[] = [
     featured: true,
   },
 ];
-
