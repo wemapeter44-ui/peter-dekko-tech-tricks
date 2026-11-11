@@ -1,4 +1,5 @@
-﻿import type { Metadata, Viewport } from "next";
+﻿
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
@@ -27,10 +28,16 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: { default: site.name, template: `%s | ${site.shortName}` },
   description: site.description,
-  metadataBase: new URL(site.url),
+  metadataBase: new URL("https://www.pdtsoftwares.co.ke"),
+
+  alternates: {
+    canonical: "/",
+  },
+
   verification: {
     google: "google6cfe20291e189093",
   },
+
   icons: {
     icon: [
       { url: "/favicon.ico?v=1", sizes: "any" },
@@ -39,15 +46,24 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico?v=1",
     apple: "/apple-touch-icon.png?v=1",
   },
+
   openGraph: {
     title: site.name,
     description: site.description,
-    url: site.url,
+    url: "https://www.pdtsoftwares.co.ke/",
     siteName: site.name,
     type: "website",
     locale: "en_KE",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: site.name }],
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: site.name,
+      },
+    ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: site.name,
@@ -56,7 +72,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrains.variable}`}>
       <body className="antialiased">
@@ -64,7 +84,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <Navbar />
-        <main id="main-content" tabIndex={-1} className="min-h-[70vh] outline-none">
+        <main
+          id="main-content"
+          tabIndex={-1}
+          className="min-h-[70vh] outline-none"
+        >
           {children}
         </main>
         <Footer />
