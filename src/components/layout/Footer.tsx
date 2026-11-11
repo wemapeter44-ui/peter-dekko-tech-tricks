@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import Image from "next/image";
 import type { IconType } from "react-icons";
 import { FaGithub, FaLinkedinIn, FaYoutube } from "react-icons/fa";
@@ -39,15 +39,15 @@ export function Footer() {
           <Link href="/" className="group flex w-fit items-center gap-3">
             <Image
               src="/logo.jpeg"
-              alt="Peter Dekko Tech Tricks"
+              alt="PDT Softwares"
               width={42}
               height={42}
               className="rounded-xl object-cover ring-1 ring-white/10 transition group-hover:ring-accent/60"
             />
             <span className="text-sm font-bold tracking-wide text-foreground transition group-hover:text-accent">
-              Peter Dekko
-              <span className="block text-xs font-medium text-accent">
-                TECH TRICKS
+              PDT <span className="text-accent">Softwares</span>
+              <span className="block text-xs font-medium text-foreground/50">
+                DIGITAL SOLUTIONS
               </span>
             </span>
           </Link>
@@ -151,7 +151,7 @@ export function Footer() {
       <div className="border-t border-border">
         <Container className="flex flex-col gap-2 py-5 text-xs text-foreground/40 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} Peter Dekko Tech Tricks. All rights
+            © {new Date().getFullYear()} PDT Softwares. All rights
             reserved.
           </p>
           <p className="tracking-wide">
